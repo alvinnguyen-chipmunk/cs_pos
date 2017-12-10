@@ -39,6 +39,20 @@ extern "C"
 
 /********** Constant  and compile switch definition section *******************/
 /********** Type definition section *******************************************/
+typedef enum CS_POS_RETVALUE
+{
+    CS_POS_SUCCESS = 0,
+    CS_POS_FAILURE = 1
+
+}CS_POS_RETVALUE;
+
+typedef enum CS_POS_ERROR
+{
+    CS_POS_ERROR_0 = 0,
+    CS_POS_ERROR_1 = 1
+
+}CS_POS_ERROR;
+
 /********** Macro definition section ******************************************/
 #define ANSI_COLOR_RED     "\x1b[1;31m"
 #define ANSI_COLOR_GREEN   "\x1b[1;32m"
@@ -87,7 +101,7 @@ extern "C"
 
 
 #define CS_DEBUG_0()            DEBUG("\n")
-#define CS_DEBUG(format, ...)   DEBUG("format \n", ##__VA_ARGS__)
+#define CS_DEBUG(format, ...)   DEBUG(format "\n", ##__VA_ARGS__)
 
 #define CS_INFO(format, ...)    CS_GREEN_PRINT(format, ##__VA_ARGS__)
 #define CS_SHOW(format, ...)    CS_BLUE_PRINT(format, ##__VA_ARGS__)

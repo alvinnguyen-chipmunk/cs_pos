@@ -10,7 +10,7 @@
  *  Agreement referenced above.                                                *
  ******************************************************************************/
 
-/** @file cs_pos_main.h
+/** @file cs_pos_mainwindow.h
  *  @brief Function prototypes for the main windows of POS application of chipmunk solutions
  *
  *  This contains the prototypes for the main windows of POS application of chipmunk solutions
@@ -23,34 +23,60 @@
  *  @Copyright	GNU Public License.
  */
 
-#ifndef CS_POS_MAIN_H_INCLUDED
-#define CS_POS_MAIN_H_INCLUDED
+#ifndef CS_POS_MAINWINDOW_H_INCLUDED
+#define CS_POS_MAINWINDOW_H_INCLUDED
 #ifdef __cplusplus
 extern "C"
 {
 #endif
 /********** Include section ***************************************************/
 #include <stdio.h>
+#include <stdlib.h>
 #include <gtk/gtk.h>
 #include <glib.h>
+
+#include "common/cs_common_console.h"
 
 /********** Constant and compile switch definition section ********************/
 /********** Type definition section *******************************************/
 /********** Macro definition section*******************************************/
 /********** Function declaration section **************************************/
 
-/** @brief Declare function which finalize all then quit the application.
+/** @brief Declare function which initialize all objects of main window.
      *
-     *  The function which finalize all then quit the application.
+     *  The function which initialize all objects of main window.
+     *  Such as widgets, signal, callback routine, ...
      *
-     *  @param object       The object which received the signal.
-     *  @param user_data    User data set when the signal handler was connected.
+     *  @param  None
      *
-     *  @return None
+     *  @return CS_POS_SUCCESS: If success.
+     *  @return CS_POS_FAILURE: If failure.
      */
-void cs_pos_main_quit (GtkWidget *object, gpointer user_data);
+CS_POS_RETVALUE cs_pos_mainwindow_init(void);
 
-#endif // CS_POS_MAIN_H_INCLUDED
+/** @brief Declare function which finalize all objects of main window.
+     *
+     *  The function which finalize all objects of main window.
+     *  Such as widgets, signal, callback routine, ...
+     *
+     *  @param  None
+     *
+     *  @return None.
+     */
+void cs_pos_mainwindow_finalize(void);
+
+/** @brief Declare function which show main window.
+     *
+     *  The function which show main window.
+     *  Such as widgets, signal, callback routine, ...
+     *
+     *  @param  None
+     *
+     *  @return None.
+     */
+void cs_pos_mainwindow_show (void);
+
+#endif // CS_POS_MAINWINDOW_H_INCLUDED
 #ifdef __cplusplus
 }
 #endif

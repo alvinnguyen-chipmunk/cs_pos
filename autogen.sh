@@ -28,14 +28,14 @@ __check__()
 		exit 1
 	}
 
-#	(libtoolize --version) < /dev/null > /dev/null 2>&1 || {
-#	(glibtoolize --version) < /dev/null > /dev/null 2>&1 || {
-#	         __ERROR__ "You must have 'libtool' installed."
-#        	 echo "You can get it from:"
-#	         echo "  http://www.gnu.org/software/libtool/"
-#	         exit 1
-#	     }
-#	}
+	(libtoolize --version) < /dev/null > /dev/null 2>&1 || {
+	(glibtoolize --version) < /dev/null > /dev/null 2>&1 || {
+	         __ERROR__ "You must have 'libtool' installed."
+        	 echo "You can get it from:"
+	         echo "  http://www.gnu.org/software/libtool/"
+	         exit 1
+	     }
+	}
 
 	(pkg-config --version) < /dev/null > /dev/null 2>&1 || {
 	        __ERROR__ "You must have pkg-config installed to compile $package."
@@ -65,14 +65,14 @@ __execute__()
 {
 	ERROR=0
 
-#	__INFO__ "Processing libtoolize --copy --force || glibtoolize --copy --force"
-#	libtoolize --copy --force || glibtoolize --copy --force
-#	ERROR_NO="$?"
-#	if [ "${ERROR_NO}" -ne "0" ]; then
-#		__ERROR__ "Do 'libtoolize' or 'glibtoolize' return ${ERROR_NO}"
-#		__clean__
-#		exit 1		
-#	fi
+	__INFO__ "Processing libtoolize --copy --force || glibtoolize --copy --force"
+	libtoolize --copy --force || glibtoolize --copy --force
+	ERROR_NO="$?"
+	if [ "${ERROR_NO}" -ne "0" ]; then
+		__ERROR__ "Do 'libtoolize' or 'glibtoolize' return ${ERROR_NO}"
+		__clean__
+		exit 1		
+	fi
 
 	__INFO__ "Processing aclocal"
 	aclocal

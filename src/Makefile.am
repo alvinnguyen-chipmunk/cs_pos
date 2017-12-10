@@ -5,20 +5,29 @@ else
 DEBUG_CFLAGS =
 endif
 
+CS_UI = -DCS_POS_UI_LOCATION=\""$(DESTDIR)/$(pkgdatadir)/cs_pos.ui"\"
+
 CS_INCLUDE_FILES = 	include/cs_pos_main.h		\
-			include/common/cs_common_console.h	
+			include/cs_pos_mainwindow.h	\
+			include/cs_pos_widgets.h	\
+			include/common/cs_common_console.h
+
 CS_SOURCE_FILES = 	common/cs_common_console.c	\
-			cs_pos_main.c
+			cs_pos_main.c			\
+			cs_pos_mainwindow.c		\
+			cs_pos_widgets.c
 
 CS_SOURCES = ${CS_INCLUDE_FILES} ${CS_SOURCE_FILES}
 
 CS_CPPFLAGS = 
 
-CS_CFLAGS = $(DEBUG_CFLAGS) -std=c99 -D_BSD_SOURCE -D_DEFAULT_SOURCE -I$(srcdir)/include \
+CS_CFLAGS = $(DEBUG_CFLAGS) -std=c99 -D_BSD_SOURCE -D_DEFAULT_SOURCE -I$(srcdir)/include 	\
+	    $(CS_UI)										\
 	    $(GLIB_CFLAGS) $(GTK3_CFLAGS)
 
 #CS_LDFLAGS = -version-info @CS_VERSION_INFO@
-CS_LDFLAGS = $(GLIB_LIBS) $(GTK3_LIBS)
+
+CS_LDADD = $(GLIB_LIBS) $(GTK3_LIBS)
 
 ######################## CS POS APPLICATION ##########################
 

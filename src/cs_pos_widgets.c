@@ -10,10 +10,10 @@
  *  Agreement referenced above.                                                *
  ******************************************************************************/
 
-/** @file cs_pos_main.c
- *  @brief The main windows of POS application of chipmunk solutions.
+/** @file cs_pos_widgets.c
+ *  @brief Implement all widgets of POS application of chipmunk solutions.
  *
- *  The main windows of POS application of chipmunk solutions.
+ *  Implement all widgets of POS application of chipmunk solutions.
  *
  *  @author 	Alvin Nguyen (alvin.nguyen@styl.solutions)
  *  @author 	Khuong Nguyen (khuongnguyen00331@gmail.com)
@@ -28,90 +28,38 @@ extern "C"
 #endif
 
 /********** Include section ***************************************************/
-#include <stdio.h>
-#include <stdlib.h>
-
-#include "common/cs_common_console.h"
-#include "cs_pos_main.h"
 #include "cs_pos_widgets.h"
-#include "cs_pos_mainwindow.h"
 
 /********** Local Constant and compile switch definition section **************/
 /********** Local Type definition section *************************************/
 /********** Local Macro definition section ************************************/
 /********** Local (static) variable definition ********************************/
+GtkBuilder * cs_pos_builder = NULL;
+
 /********** Local (static) function declaration section ***********************/
 /********** Local function definition section *********************************/
 /********** Global function definition section ********************************/
-int
-main (int argc, char *argv[])
+
+CS_POS_RETVALUE
+cs_pos_widgets_init (void)
 {
-    CS_INFO("Start POS application.");
-    CS_SHOW("Start POS application.");
     CS_DEBUG_0();
-    CS_DEBUG("Start POS application.");
 
-    CS_DEBUG("CS_POS_UI_LOCATION: %s", CS_POS_UI_LOCATION);
+    guint ret_value = 0;
+    /* Construct a GtkBuilder instance and load our UI description */
+    cs_pos_builder = gtk_builder_new_from_file (CS_POS_UI_LOCATION);
+    if(cs_pos_builder == NULL)
+        return CS_POS_FAILURE;
 
-    CS_POS_RETVALUE ret_value = CS_POS_FAILURE;
-
-    /* ================================= INITIALIZE ================================= */
-    #if 1
-    /* Initialize GTK basic object */
-    gtk_init (NULL, NULL);
-
-    /* Initialize widgets and builder */
-    cs_pos_widgets_init();
-    if(ret_value == CS_POS_FAILURE)
-    {
-        CS_INFO("Initialize widgets success.");
-    }
-    else
-    {
-        CS_INFO("Initialize widgets failure.");
-    }
-
-    /* Initialize main window */
-    ret_value = cs_pos_mainwindow_init();
-    if(ret_value == CS_POS_FAILURE)
-    {
-        CS_INFO("Initialize main window success.");
-    }
-    else
-    {
-        CS_INFO("Initialize main window failure.");
-    }
-
-
-    /* ================================= RUN ======================================== */
-
-    /* Show main window */
-    cs_pos_mainwindow_show ();
-
-    /* main loop */
-    gtk_main ();
-
-    /* ================================= FINALIZE =================================== */
-
-    cs_pos_main_quit (NULL, NULL);
-
-    #endif // 0
-
-    return EXIT_SUCCESS;
+    return CS_POS_SUCCESS;
 }
 
 void
-cs_pos_main_quit (GtkWidget *object, gpointer user_data)
+cs_pos_widgets_finalize (void)
 {
-    /* Finalize main window */
-    cs_pos_mainwindow_finalize();
-
-    /* Finalize widgets and builder */
-    cs_pos_widgets_finalize();
-
-    /* quit main loop */
-    gtk_main_quit();
+    CS_DEBUG_0();
 }
+
 #ifdef __cplusplus
 }
 #endif
