@@ -1,0 +1,14 @@
+prefix=@prefix@
+exec_prefix=@exec_prefix@
+libdir=@libdir@
+includedir=@includedir@
+datarootdir=@datarootdir@
+datadir=@datadir@
+localedir=@localedir@
+
+Name: CHIPMUNK SQL QUERY LIBRARY
+Description: A library that will helping query data from SQL server.
+Requires:
+Version: @VERSION@
+Libs: -L${libdir} -lcssqlquery @MYSQL_CONFIG_LIBS@
+Cflags: -I${includedir} @MYSQL_CONFIG_CFLAGS@
